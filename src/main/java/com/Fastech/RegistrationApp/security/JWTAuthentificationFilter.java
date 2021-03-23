@@ -33,11 +33,10 @@ public class JWTAuthentificationFilter extends UsernamePasswordAuthenticationFil
     public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response) throws AuthenticationException {
         try {
             AppUser appUser = new ObjectMapper().readValue(request.getInputStream(), AppUser.class);
-            return authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(appUser.getUserName(), appUser.getPassword()));
+            return authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(appUser.getEmailAdress(), appUser.getPassword()));
 
         } catch (IOException ex) {
             ex.printStackTrace();
-//            Logger.getLogger(JWTAuthentificationFilter.class.getName()).log(Level.SEVERE, null, ex);
             throw new RuntimeException(ex);
         }
 

@@ -32,7 +32,7 @@ public class SecurityCinfig extends WebSecurityConfigurerAdapter {
         http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
         http.authorizeRequests().antMatchers(HttpMethod.GET, "/appUser/**").permitAll();
         http.authorizeRequests().antMatchers("/login/**", "/singUp/**").permitAll();
-        http.authorizeRequests().antMatchers("/appUsers/**,/appRoles/**").hasAuthority("ADMIN");
+        http.authorizeRequests().antMatchers("/appUsers/**,/appRoles/**,/AllUsers/").hasAuthority("ADMIN");
         http.authorizeRequests().anyRequest().authenticated();
         http.addFilter(new JWTAuthentificationFilter(authenticationManager()));
         http.addFilterBefore(new JWTAuthorizationFilter(), UsernamePasswordAuthenticationFilter.class);

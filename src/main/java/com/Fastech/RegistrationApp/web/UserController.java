@@ -4,9 +4,9 @@ import com.Fastech.RegistrationApp.entities.AppUser;
 import com.Fastech.RegistrationApp.service.AccountService;
 import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 public class UserController {
@@ -15,13 +15,26 @@ public class UserController {
 
     @PostMapping("/singUp")
     public AppUser singUp(@RequestBody UserForm userForm) {
-        return accountService.saveUser(userForm.getUserName(), userForm.getPassword(), userForm.getConfirmedPassword());
+        return accountService.saveUser(userForm.getEmailAdress(), userForm.getFirstName(), userForm.getLastName(), userForm.getPassword(), userForm.getConfirmedPassword());
+    }
+
+    @PutMapping("/upDateUser/{id}")
+    public AppUser updateUser(@PathVariable long id, @RequestBody AppUser appUser) {
+        return accountService.updateUser(id, appUser);
+    }
+
+    @GetMapping("/AllUsers")
+    public List<AppUser> getAllUsers() {
+        return accountService.getAllUsers();
     }
 }
 
+
 @Data
 class UserForm {
-    private String userName;
+    private String emailAdress;
+    private String firstName;
+    private String lastName;
     private String password;
     private String ConfirmedPassword;
 }
