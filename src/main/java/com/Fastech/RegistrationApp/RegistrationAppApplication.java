@@ -16,7 +16,7 @@ public class RegistrationAppApplication {
     public static void main(String[] args) {
         SpringApplication.run(RegistrationAppApplication.class, args);
     }
-
+/*
     @Bean
     CommandLineRunner start(AccountService accountService) {
         return args -> {
@@ -28,7 +28,7 @@ public class RegistrationAppApplication {
             accountService.addRoleToUser("admin", "ADMIN");
         };
     }
-
+*/
     @Bean
     BCryptPasswordEncoder getBCPE() {
         return new BCryptPasswordEncoder();
